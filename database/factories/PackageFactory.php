@@ -17,6 +17,7 @@ class PackageFactory extends Factory
     public function definition()
     {
         return [
+            'user_id' => '1',
             'doner_name' => $this->faker->name() ,
             'category_id' => $this->faker->numberBetween(1,4),
             'condition' => $this->faker->numberBetween(1,4),

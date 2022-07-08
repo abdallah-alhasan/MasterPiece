@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\City;
+use App\Models\Package;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -148,4 +150,17 @@ public function updateProfile(Request $request, User $user)
     ->with('message', 'user updated successfully');
 }
 
+
+    //profile
+    public function getProfile($user){
+        $profileInfo = User::find($user);
+        $ads = new Package;
+        $allAds = $ads->where('user_id' , auth()->user()->id)->paginate(5);
+        $getCategory = function ($id){
+            $cat = new Category;
+            $getCat = $cat->where('id' , $id)->get();
+            return $getCat[0];
+        };
+        return view('profile.index', compact('profileInfo','allAds', 'getCategory'));
+    }
 }

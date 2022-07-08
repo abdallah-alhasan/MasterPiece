@@ -27,17 +27,12 @@ Route::get('/categories', function () {
 Route::get('/product={id}', function ($id) {
     return view('pages.single-product');
 });
-Route::get('/categories', function () {
-    return view('pages.categories');
-});
 
 
 
 
 // profile
-Route::get('/profile/user={user}', function () {
-    return view('profile.index');
-});
+Route::get('/profile/user={user}', [UserController::class,'getProfile'])->middleware('auth');
 Route::get('/profile/edit-user={id}', function ($id) {
     return view('profile.edit-profile');
 });
@@ -63,16 +58,11 @@ Route::resource('admin/messages' , 'App\Http\Controllers\MessageController')->mi
 Route::resource('admin/cities' , 'App\Http\Controllers\CityController')->middleware('auth');
 Route::get('items/{id}' , 'App\Http\Controllers\OrderController@orderItems');
 
-Route::get('orders/{id}' , 'App\Http\Controllers\OrderController@orders');
-Route::get('order/items/{id}' , 'App\Http\Controllers\OrderController@profileItems');
-
-
-Route::resource('categories', CategoryController::class);
-Route::get('categories/{packages}', [CategoryController::class,'show'])->name('categories.show');
+Route::resource('admin/categories', CategoryController::class);
 
 Route::get('/softDelete/{package}', [PackageController::class,'softDelete'])->name('packages.softDelete');
 Route::resource('packages', PackageController::class);
-Route::resource('orders', OrderController::class);
+Route::resource('admin/orders', OrderController::class);
 
 Route::get('' , 'App\Http\Controllers\CategoryController@showCategory');
 

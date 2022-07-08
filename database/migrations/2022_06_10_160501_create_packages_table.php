@@ -15,6 +15,7 @@ class CreatePackagesTable extends Migration
     {
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('city_id');
             $table->string('doner_name');
@@ -28,6 +29,7 @@ class CreatePackagesTable extends Migration
             $table->timestamps();
 
             $table->index('city_id');
+            $table->index('user_id');
             $table->index('category_id');
         });
     }
