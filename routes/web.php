@@ -4,7 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,15 +30,18 @@ Route::get('/categories', function () {
 Route::get('/product={id}', function ($id) {
     return view('pages.single-product');
 });
-
-
+Route::get('/lo', function () {
+    return view('welcome');
+});
+Route::get('/dashboard', function () {
+    return view('auth.reset-password');
+});
 
 
 // profile
-Route::get('/profile/user={user}', [UserController::class,'getProfile'])->middleware('auth');
-Route::get('/profile/edit-user={id}', function ($id) {
-    return view('profile.edit-profile');
-});
+Route::get('/profile/user={user}', [ProfileController::class,'show'])->middleware('auth');
+Route::get('/profile/edit-user={user}',  [ProfileController::class,'edit'])->middleware('auth')->name('edit-profile');
+Route::patch('/profile/update={user}',  [ProfileController::class,'update'])->middleware('auth')->name('update_profile');
 
 Route::get('/editprofile/{user}', ['App\Http\Controllers\UsersController', 'editProfile'])->name('pages.editprofile');
 
