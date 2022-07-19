@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Package;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
-use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Report\Php;
 
 class CategoryController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -18,16 +14,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-
-        $data= Category::orderBy('id', 'ASC')->filter(request(['search']))->oldest()->paginate(10);
-        return view("admin.categories.index",compact("data"));
+        //
     }
 
-    public function showCategory()
-    {
-        $data= Category::all();
-        return view("pages.index",compact("data"));
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -35,7 +24,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view("admin.categories.create");
+        //
     }
 
     /**
@@ -46,22 +35,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-
-        $input = $request->all();
-
-        if($request->file('image')){
-            $file= $request->file('image');
-            $filename= date('YmdHi').$file->getClientOriginalName();
-            $file-> move(public_path('Image'), $filename);
-            $input['image'] = "$filename";
-
-        }
-
-
-        Category::create($input);
-
-
-        return redirect()->route('categories.index')->with('message','category created successfully.');
+        //
     }
 
     /**
@@ -73,14 +47,6 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         //
-        $categories = Category::all();
-        if (auth()->user()){
-            $packages = Package::where('city_id', auth()->user()->city_id)->Where('category_id', $category->id)->Where('status', 1)->latest()->paginate(12);
-            return view('pages.donations', compact('packages','category','categories'));
-        }
-            $packages = Package::Where('category_id',  $category->id)->Where('status', 1)->latest()->paginate(12);
-            return view('pages.donations', compact('packages','category','categories'));
-
     }
 
     /**
@@ -91,7 +57,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('admin.categories.edit' , compact('category'));
+        //
     }
 
     /**
@@ -103,36 +69,8 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-
-
-      $request->validate([
-            'name' => 'required',
-            'desc' => 'required',
-            'image' => 'image',
-
-        ]);
-
-        $input = $request->all();
-
-        if($request->file('image')){
-            $file= $request->file('image');
-            $filename= date('YmdHi').$file->getClientOriginalName();
-            $file-> move(public_path('Image'), $filename);
-            $input['image'] = "$filename";
-
-        }
-
-
-
-
-         $category->update($input);
-        return redirect()->route('categories.index')->with('message','category updated successfully.');
-
+        //
     }
-
-
-
-
 
     /**
      * Remove the specified resource from storage.
@@ -142,19 +80,6 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $category->delete();
-        return redirect()->route('categories.index')
-        ->with('message', 'category deleted successfully');
+        //
     }
-
-
-
-
-
 }
-
-
-
-
-
-

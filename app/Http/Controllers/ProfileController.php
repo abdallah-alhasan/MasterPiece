@@ -2,15 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\City;
-use App\Models\User;
-use App\Models\Package;
 use App\Models\Profile;
-use App\Models\Category;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreProfileRequest;
-use App\Http\Requests\UpdateProfileRequest;
-use Illuminate\Validation\Rules\Unique;
+use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
@@ -21,7 +14,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return view('profile.index');
+        //
     }
 
     /**
@@ -37,10 +30,10 @@ class ProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreProfileRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProfileRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -51,22 +44,9 @@ class ProfileController extends Controller
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function show($user)
+    public function show(Profile $profile)
     {
-        $profileInfo = User::find($user);
-        $ads = new Package;
-        $allAds = $ads->where('user_id' , $user)->paginate(5);
-        $getCategory = function ($id){
-            $cat = new Category;
-            $getCat = $cat->where('id' , $id)->get();
-            return $getCat[0];
-        };
-        $getLocation = function ($id){
-            $city = new City;
-            $getCity = $city->where('id' , $id)->get();
-            return $getCity[0];
-        };
-        return view('profile.index', compact('profileInfo','allAds','getCategory', 'user', 'getLocation'));
+        //
     }
 
     /**
@@ -75,31 +55,21 @@ class ProfileController extends Controller
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Profile $profile)
     {
-        return view('profile.edit-profile' , compact('user'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateProfileRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function update(User $user)
+    public function update(Request $request, Profile $profile)
     {
-        $imagePath = request('image')->store('profile' , 'public');
-
-            $data = request()->validate([
-            'name' => 'required',
-            'email' => ['required', 'unique:users'],
-            'phonenumber' => 'required',
-            'image' => 'image',
-        ]);
-        
-        $user->update(array_merge($data , ['image' => $imagePath]));
-        return redirect("/profile/edit-user=$user->id")->with('message', 'Information updated!');;
+        //
     }
 
     /**

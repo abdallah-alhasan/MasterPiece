@@ -1,13 +1,7 @@
 <?php
 
+use App\Http\Controllers\TradeController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\PackageController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\Auth\PasswordResetLinkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,58 +14,20 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 |
 */
 
-//pages
 Route::get('/', function () {
-    return view('pages.index');
-});
-Route::get('/categories', function () {
-    return view('pages.categories');
-});
-Route::get('/product={id}', function ($id) {
-    return view('pages.single-product');
-});
-Route::get('/lo', function () {
     return view('welcome');
 });
+
 Route::get('/dashboard', function () {
-    return view('auth.reset-password');
-});
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 
-// profile
-Route::get('/profile/user={user}', [ProfileController::class,'show'])->middleware('auth');
-Route::get('/profile/edit-user={user}',  [ProfileController::class,'edit'])->middleware('auth')->name('edit-profile');
-Route::patch('/profile/update={user}',  [ProfileController::class,'update'])->middleware('auth')->name('update_profile');
+//trades routes//
 
-Route::get('/editprofile/{user}', ['App\Http\Controllers\UsersController', 'editProfile'])->name('pages.editprofile');
-
-Route::post('/updateprofile/{user}', ['App\Http\Controllers\UsersController', 'updateProfile'])->name('pages.updateProfile');
-
-// Route::get('/profile/{user}', ['App\Http\Controllers\UsersController', 'showProfile']);
+Route::resource('trade', TradeController::class);
 
 
-//admin routes
-Route::get('admin/user/approve/{id}', [UserController::class,'approve']);
-Route::get('admin/users/approve-all', [UserController::class,'approveAll']);
-Route::get('admin/order/approve/{id}', [OrderController::class,'approve']);
-Route::get('admin/package/approve/{id}', [PackageController::class,'approve']);
-Route::get('admin/packages/approve-all', [PackageController::class,'approveAll']);
 
-Route::resource('admin/users' , 'App\Http\Controllers\UserController')->middleware('auth');
-Route::resource('admin/packages' , 'App\Http\Controllers\PackageController')->middleware('auth');
-Route::resource('admin/categories' , 'App\Http\Controllers\CategoryController')->middleware('auth');
-Route::resource('admin/messages' , 'App\Http\Controllers\MessageController')->middleware('auth');
-Route::resource('admin/cities' , 'App\Http\Controllers\CityController')->middleware('auth');
-Route::get('items/{id}' , 'App\Http\Controllers\OrderController@orderItems');
-
-Route::resource('admin/categories', CategoryController::class);
-
-Route::get('/softDelete/{package}', [PackageController::class,'softDelete'])->name('packages.softDelete');
-Route::resource('packages', PackageController::class);
-Route::resource('admin/orders', OrderController::class);
-
-Route::get('' , 'App\Http\Controllers\CategoryController@showCategory');
-
-// Route::get('/user-profile-{id}', [ProfilesController::class, 'index'])->middleware(['auth'])->name('profile');
 
 require __DIR__.'/auth.php';
