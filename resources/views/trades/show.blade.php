@@ -7,7 +7,7 @@
     <div class="heading--trades">
         <h3>Please choose an item to trade</h3>
     </div>
-    <form action="" class="trades-form">
+    <div class="trades-form">
         <table class="profile__table">
             <thead>
                 <tr>
@@ -23,7 +23,7 @@
             </thead>
 
             <tbody>
-                @foreach ($trades as $index => $trade)
+                @foreach ($trades as $index => $request)
                     <tr>
                         <td><a href="#modal-info" class="open-modal">{{$index + 1}}</a></td>
                         <td>
@@ -31,20 +31,33 @@
                                 <img src="/img/cards/5.jpg" alt="">
                             </div>
                         </td>
-                        <td>{{$trade->title}}</td>
-                        <td>{{$trade->name}}</td>
-                        <td>{{$trade->created_at}}</td>
-                        <td><span class="profile__price">{{$trade->price}}</span></td>
-                        <td><span class="profile__status {{$trade->status  ? 'profile__status--confirmed' :''}}">{{$trade->status ? 'Conformed' : 'Pending'}}</span></td>
-                        <td><button class="profile__delete" type="button"><svg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'><line x1='368' y1='368' x2='144' y2='144' style='fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'/><line x1='368' y1='144' x2='144' y2='368' style='fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'/></svg></button></td>
+                        <td>{{$request->title}}</td>
+                        <td>{{$request->name}}</td>
+                        <td>{{$request->created_at}}</td>
+                        <td><span class="profile__price">{{$request->price}}</span></td>
+                        <td><span class="profile__status {{$request->status  ? 'profile__status--confirmed' :''}}">{{$request->status ? 'Conformed' : 'Pending'}}</span></td>
+                        <td>
+                            <form action="{{route('request.store', $request->id)}}" method="POST">
+                                @csrf
+                                <input type="hidden" name="trade_with_id" value="{{$request->id}}">
+                                <input type="hidden" name="trade_id" value="{{$trade->id}}">
+                                <button class="details__buy details__buy--download" type="submit" style="padding: 10px">Request</button>
+                            </form>
+                        </td>
+                            
                     </tr>
                 @endforeach
             </tbody>
         </table>
-    </form>
+    </div>
     <button id="close" class="profile__delete" type="button"><svg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'><line x1='368' y1='368' x2='144' y2='144' style='fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'/><line x1='368' y1='144' x2='144' y2='368' style='fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'/></svg></button></div>
 <section class="section section--first section--bg" data-bg="/img/bg.jpg">
     <div class="container">
+        @if (Session::has('message'))
+                <div class="col-12" style="margin-bottom:40px;">
+                    <h3 class="section__title section__message" style="color: #29b474">{{Session('message')}}</h3>
+                </div>
+        @endif
         <div class="row">
             <div class="col-12">
                 <div class="details details--inverse">

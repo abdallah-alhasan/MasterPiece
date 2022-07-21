@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\TradeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TradeController;
+use App\Http\Controllers\RequestsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.home');
 });
 
 Route::get('/dashboard', function () {
@@ -25,7 +26,8 @@ Route::get('/dashboard', function () {
 
 //trades routes//
 
-Route::resource('trade', TradeController::class);
+Route::resource('trade', TradeController::class)->middleware('auth');
+Route::resource('request', RequestsController::class);
 
 
 

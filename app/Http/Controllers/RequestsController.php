@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Request;
-use App\Http\Requests\StoreRequestRequest;
-use App\Http\Requests\UpdateRequestRequest;
+use Illuminate\Http\Request;
+use App\Models\Requests;
 
-class RequestController extends Controller
+class RequestsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,21 +30,27 @@ class RequestController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreRequestRequest  $request
+     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Models\Requests  $requests
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreRequestRequest $request)
+    public function store(Request $request, Requests $requests)
     {
-        //
+        $requests->create([
+            'user_id' => auth()->user()->id, 
+            'trade_id' => request('trade_id'),
+            'trade_with_id' => request('trade_with_id'),
+        ]);
+        return redirect('trade/' . request("trade_id"))->with('message', 'Request sent');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show($id)
     {
         //
     }
@@ -53,10 +58,10 @@ class RequestController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit($id)
     {
         //
     }
@@ -64,11 +69,11 @@ class RequestController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateRequestRequest  $request
-     * @param  \App\Models\Request  $request
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRequestRequest $request, Request $request)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -76,10 +81,10 @@ class RequestController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
         //
     }

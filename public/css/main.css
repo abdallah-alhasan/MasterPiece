@@ -921,6 +921,9 @@ body::-webkit-scrollbar-thumb {
   background-color: #a782e9;
   border-radius: 4px;
 }
+.section__message:before {
+  background-color: #29b468 !important;
+}
 .section__title--pre:before {
   background-color: #f26c2a;
 }
@@ -4969,6 +4972,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   color: #dbdada;
   font-size: 14px;
   margin-bottom: 10px;
+  margin-top: 20px;
   font-weight: 400;
 }
 .form__input {
@@ -5060,6 +5064,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   font-size: 13px;
   letter-spacing: 0.6px;
   text-transform: uppercase;
+  margin-top: 20px;
 }
 .form__btn:hover {
   background-color: #a782e9;
@@ -5421,3 +5426,6 @@ body::-webkit-scrollbar-thumb {
   border: 3px solid #a782e9;  /* creates padding around scroll thumb */
 }
 
+.invalid-feedback{
+  color: red;
+}

@@ -25,7 +25,7 @@ class TradeController extends Controller
      */
     public function create()
     {
-        //
+        return view('trades.create');
     }
 
     /**
@@ -36,7 +36,22 @@ class TradeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required',
+            'image' => ['required', 'image'], 
+            'platform_id' => 'required', 
+            'tags' => 'regex:/(\s*\,\s*)*$/',
+        ]);
+
+        $imagePath = request('image')->store('trades', 'public');
+
+        Trade::create(array_merge($data, [
+            'image' => $imagePath,
+            'user_id' => auth()->user()->id,
+        ]));
+
+        return redirect('trade/create')->with('message', 'Trade created successfully');
+
     }
 
     /**
@@ -52,7 +67,10 @@ class TradeController extends Controller
         // ->orderBy('trades.created_at', 'desc')
         // ->select(['trades.*', 'platforms.name'])
         // ->get();
-        $trades = Trade::join('platforms', 'trades.platform_id', '=', 'platforms.id')->select(['trades.*', 'platforms.name'])->get();
+        $trades = Trade::join('platforms', 'trades.platform_id', '=', 'platforms.id')
+        ->select(['trades.*', 'platforms.name'])
+        ->where('trades.user_id' , '=' , auth()->user()->id)
+        ->get();
 
         return view('trades.show', compact('trade', 'trades'));
     }
