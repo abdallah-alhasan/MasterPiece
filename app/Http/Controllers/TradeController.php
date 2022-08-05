@@ -72,7 +72,8 @@ class TradeController extends Controller
         ->where('trades.user_id' , '=' , auth()->user()->id)
         ->get();
 
-        return view('trades.show', compact('trade', 'trades'));
+        $related = Trade::where('platform_id', '=', $trade->platform_id)->where('id', '!=', $trade->id)->limit(10)->get();
+        return view('trades.show', compact('trade', 'trades', 'related'));
     }
 
     /**

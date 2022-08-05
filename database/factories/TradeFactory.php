@@ -21,7 +21,7 @@ class TradeFactory extends Factory
             'platform_id' => $this->faker->numberBetween(1,4),
             'title' => $this->faker->text(50),
             'price' => 399.99,
-            'image' => $this->faker->image(null, 640,480, 'games'),
+            'image' => 'trades/6UAgzBmsuaHB3ZYgs7ToE4U9Gww1KUNkiV8hbJyP.png',
             'tags' => $this->faker->word(),
         ];
     }

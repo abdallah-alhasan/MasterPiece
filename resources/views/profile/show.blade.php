@@ -134,17 +134,17 @@
 									<tbody>
 										@foreach ($requests as $index => $request)
 											<tr>
-												<td><a href="/trade/{{$request->trade_with_id}}">{{$index + 1}}</a></td>
+												<td><a href="/trade/{{$request->trade_id}}">{{$index + 1}}</a></td>
 												<td>
 													<div class="profile__img">
-														<img src="/img/cards/5.jpg" alt="">
+														<img src={{'/storage/'. $request->trade_image}} alt="">
 													</div>
 												</td>
-												<td>{{$request->trade_with_title}}</td>
+												<td>{{$request->trade_title}}</td>
 												<td>{{$request->platform}}</td>
-												<td><a href="/trade/{{$request->trade_id}}">View</a></td>
+												<td><a href="/trade/{{$request->trade_with_id}}">View</a></td>
 												<td>{{$request->created_at}}</td>
-												<td><span class="profile__status {{$request->status  ? 'profile__status--confirmed' :''}}">{{$request->status ? 'Conformed' : 'Pending'}}</span></td>
+												<td><span class="profile__status {{$request->status  ? 'profile__status--confirmed' :''}}">{{$request->status ? 'confirmed' : 'Pending'}}</span></td>
 												<td><button class="profile__delete" type="button"><svg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'><line x1='368' y1='368' x2='144' y2='144' style='fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'/><line x1='368' y1='144' x2='144' y2='368' style='fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'/></svg></button></td>
 											</tr>
 										@endforeach
@@ -206,13 +206,13 @@
 												<td><a href="/trade/{{$trade->id}}">{{$index + 1}}</a></td>
 												<td>
 													<div class="profile__img">
-														<img src="/img/cards/5.jpg" alt="">
+														<img src={{'/storage/'. $trade->image}}  alt="">
 													</div>
 												</td>
 												<td>{{$trade->title}}</td>
 												<td>{{$trade->name}}</td>
 												<td>{{$trade->created_at}}</td>
-												<td><span class="profile__status {{$trade->status  ? 'profile__status--confirmed' :''}}">{{$trade->status ? 'Conformed' : 'Pending'}}</span></td>
+												<td><span class="profile__status {{$trade->status  ? 'profile__status--confirmed' :''}}">{{$trade->status ? 'confirmed' : 'Pending'}}</span></td>
 												<td><button class="profile__delete" type="button"><svg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'><line x1='368' y1='368' x2='144' y2='144' style='fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'/><line x1='368' y1='144' x2='144' y2='368' style='fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'/></svg></button></td>
 											</tr>
 										@endforeach

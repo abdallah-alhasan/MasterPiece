@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TradeController;
 use App\Http\Controllers\RequestsController;
 
@@ -15,9 +16,7 @@ use App\Http\Controllers\RequestsController;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.home');
-});
+Route::get('/', [HomeController::class, 'index'] );
 
 Route::get('/dashboard', function () {
     return view('dashboard');

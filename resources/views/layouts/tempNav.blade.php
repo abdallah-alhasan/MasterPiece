@@ -16,23 +16,34 @@
 
                         <ul class="header__nav">
                             <li class="header__nav-item">
-                                <a class="header__nav-link" href="#" role="button" id="dropdownMenu0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='none' stroke-linecap='round' stroke-linejoin='round' stroke-width='48' d='M112 184l144 144 144-144'/></svg></a>
+                                <a class="header__nav-link" href="/"  id="dropdownMenu0">Home </a>
 
-                                <ul class="dropdown-menu header__nav-menu" aria-labelledby="dropdownMenu0">
+                                {{-- <ul class="dropdown-menu header__nav-menu" aria-labelledby="dropdownMenu0">
                                     <li><a href="index.html">Home style 1</a></li>
                                     <li><a href="index2.html">Home style 2</a></li>
-                                </ul>
+                                </ul> --}}
                             </li>
                             <li class="header__nav-item">
-                                <a class="header__nav-link" href="#" role="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catalog <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='none' stroke-linecap='round' stroke-linejoin='round' stroke-width='48' d='M112 184l144 144 144-144'/></svg></a>
+                                <a class="header__nav-link" href="/trades">Trades </a>
 
-                                <ul class="dropdown-menu header__nav-menu" aria-labelledby="dropdownMenu1">
+                                {{-- <ul class="dropdown-menu header__nav-menu" aria-labelledby="dropdownMenu1">
                                     <li><a href="catalog.html">Catalog (sidebar left)</a></li>
                                     <li><a href="catalog2.html">Catalog (sidebar right)</a></li>
                                     <li><a href="category.html">Category page</a></li>
                                     <li><a href="details.html">Details style 1</a></li>
                                     <li><a href="details2.html">Details style 2</a></li>
-                                </ul>
+                                </ul> --}}
+                            </li>
+                            <li class="header__nav-item">
+                                <a class="header__nav-link" href="/trade/create">Add a trades </a>
+
+                                {{-- <ul class="dropdown-menu header__nav-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="catalog.html">Catalog (sidebar left)</a></li>
+                                    <li><a href="catalog2.html">Catalog (sidebar right)</a></li>
+                                    <li><a href="category.html">Category page</a></li>
+                                    <li><a href="details.html">Details style 1</a></li>
+                                    <li><a href="details2.html">Details style 2</a></li>
+                                </ul> --}}
                             </li>
                             <li class="header__nav-item">
                                 <a class="header__nav-link" href="#" role="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">News <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='none' stroke-linecap='round' stroke-linejoin='round' stroke-width='48' d='M112 184l144 144 144-144'/></svg></a>
