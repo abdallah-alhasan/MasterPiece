@@ -17,6 +17,7 @@ use App\Http\Controllers\RequestsController;
 */
 
 Route::get('/', [HomeController::class, 'index'] );
+Route::get('/trades', [TradeController::class, 'index'] );
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -15,7 +15,9 @@ class TradeController extends Controller
      */
     public function index()
     {
-        //
+        // dd(Request::capture());
+        $trades = Trade::filter(request(['search', 'tags', 'platform_id', 'sort']))->paginate(12);
+        return view('pages/trades', compact('trades'));
     }
 
     /**
