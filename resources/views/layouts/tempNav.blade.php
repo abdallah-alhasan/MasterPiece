@@ -10,8 +10,8 @@
                             <span></span>
                         </button>
 
-                        <a href="index.html" class="header__logo">
-                            <img src="/img/logo.svg" alt="">
+                        <a href="/" class="header__logo">
+                            GoGame
                         </a>
 
                         <ul class="header__nav">

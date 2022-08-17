@@ -83,11 +83,11 @@
 													<label for="type2">XBOX</label>
 												</li>
 												<li>
-													<input id="type3" type="checkbox" name="platform_id" value='4'>
+													<input id="type3" type="checkbox" name="platform_id" value='2'>
 													<label for="type3">Windows</label>
 												</li>
 												<li>
-													<input id="type4" type="checkbox" name="platform_id" value='2'>
+													<input id="type4" type="checkbox" name="platform_id" value='4'>
 													<label for="type4">Mac OS</label>
 												</li>
 											</ul>
